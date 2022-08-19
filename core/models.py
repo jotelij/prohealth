@@ -15,6 +15,12 @@ class User(AbstractUser):
   #user_type = models.CharField(max_length=50, choices=USER_TYPE_CHOICES, null=True, blank=True)
   is_professional = models.BooleanField(default=False)
   is_institution_staff = models.BooleanField(default=False)
+  
+  def save(self, *args, **kwargs):
+    if not self.pk:
+      self.type = self.base_type
+    return super().save(*args, **kwargs)
+
 
 
 class InstitutionStaffManager(models.Manager):
@@ -28,11 +34,7 @@ class InstitutionStaff(User):
   
   class Meta:
     proxy = True
-  
-  def save(self, *args, **kwargs):
-    if not self.pk:
-      self.type = self.base_type
-    return super().save(*args, **kwargs)
+
 
 class ProfessionalManager(models.Manager):
 	
@@ -46,12 +48,6 @@ class Professional(User):
   
   class Meta:
     proxy = True
-  
-  def save(self, *args, **kwargs):
-    if not self.pk:
-      self.type = self.base_type
-    return super().save(*args, **kwargs)
-
 
 
 class ProfessionalProfile(models.Model):
