@@ -30,7 +30,7 @@ class InstitutionStaff(User):
     proxy = True
   
   def save(self, *args, **kwargs):
-    if not self.id:
+    if not self.pk:
       self.type = self.base_type
     return super().save(*args, **kwargs)
 
@@ -38,6 +38,7 @@ class ProfessionalManager(models.Manager):
 	
 	def get_queryset(self):
 		return super().get_queryset().filter(type = User.Types.PROFESSIONAL)
+
 
 class Professional(User):
   base_type = User.Types.PROFESSIONAL
@@ -47,7 +48,7 @@ class Professional(User):
     proxy = True
   
   def save(self, *args, **kwargs):
-    if not self.id:
+    if not self.pk:
       self.type = self.base_type
     return super().save(*args, **kwargs)
 
@@ -58,12 +59,14 @@ class ProfessionalProfile(models.Model):
   pro_category = models.CharField(max_length=100)
   pro_level = models.PositiveIntegerField()
 
+
 class BaseModel(models.Model):
   created_on = models.DateTimeField(auto_now_add=True)
   modified_on = models.DateTimeField(auto_now=True)
 
   class Meta:
     abstract=True
+
 
 class Institution(BaseModel):
   name = models.CharField(max_length=250)
