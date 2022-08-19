@@ -30,7 +30,7 @@ class InstitutionStaff(User):
     proxy = True
   
   def save(self, *args, **kwargs):
-    if not self.pk:
+    if not self.id:
       self.type = self.base_type
     return super().save(*args, **kwargs)
 
@@ -47,7 +47,7 @@ class Professional(User):
     proxy = True
   
   def save(self, *args, **kwargs):
-    if not self.pk:
+    if not self.id:
       self.type = self.base_type
     return super().save(*args, **kwargs)
 
