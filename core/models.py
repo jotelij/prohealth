@@ -2,14 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-USER_TYPE_CHOICES = (
-    (PROFESSIONAL, 'professional'),
-    (INSTITUTION_STAFF, 'institution staff'),
-    (GOVT, 'government'),
-    (STAFF, 'staff'),
-    (ADMIN, 'admin'),
-  )
-
 class User(AbstractUser):
   class Types(models.TextChoices):
     PROFESSIONAL= "PROFESSIONAL", "Professional"
