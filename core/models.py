@@ -36,7 +36,7 @@ class InstitutionStaff(User):
     proxy = True
 
 
-class ProfessionalManager(models.Manager):
+class ProfessionalManager(BaseUserManager):
 	
 	def get_queryset(self):
 		return super().get_queryset().filter(type = User.Types.PROFESSIONAL)
