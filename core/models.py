@@ -17,10 +17,9 @@ class User(AbstractUser):
   is_institution_staff = models.BooleanField(default=False)
   
   def save(self, *args, **kwargs):
-    if not self.pk:
+    if not self.id:
       self.type = self.base_type
     return super().save(*args, **kwargs)
-
 
 
 class InstitutionStaffManager(models.Manager):
